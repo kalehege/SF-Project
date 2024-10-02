@@ -1,5 +1,5 @@
 import MainMenuItem from '@/Components/Menu/MainMenuItem';
-import { Building, CircleGauge, Printer, Users } from 'lucide-react';
+import { Building, CircleGauge, Printer, Users, BookOpenText  } from 'lucide-react';
 
 interface MainMenuProps {
   className?: string;
@@ -12,6 +12,11 @@ export default function MainMenu({ className }: MainMenuProps) {
         text="Dashboard"
         link="dashboard"
         icon={<CircleGauge size={20} />}
+      />
+      <MainMenuItem
+        text="Courses"
+        link="courses"
+        icon={<BookOpenText  size={20} />}
       />
       <MainMenuItem
         text="Organizations"
