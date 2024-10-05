@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from '@inertiajs/react';
+// @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
 function AddCoursePage() {

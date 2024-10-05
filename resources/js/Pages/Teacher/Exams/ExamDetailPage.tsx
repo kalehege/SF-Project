@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 import { useForm } from '@inertiajs/react';
 
@@ -110,6 +111,7 @@ function ExamDetailPage({ exam }: ExamDetailPageProps) {
                       value={answer}
                       onChange={(e) => updateAnswer(index, e.target.value)}
                     />
+
                     {errors[`answers.${index}`] && <div className="text-red-500 text-sm">{errors[`answers.${index}`]}</div>}
                   </div>
                 ))}

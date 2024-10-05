@@ -1,4 +1,5 @@
 import React from 'react';
+// @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
 // Define the type for a course

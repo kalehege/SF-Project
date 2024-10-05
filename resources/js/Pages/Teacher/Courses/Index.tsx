@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+// @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
 type Course = {
