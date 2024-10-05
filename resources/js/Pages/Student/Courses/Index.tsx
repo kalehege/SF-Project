@@ -52,6 +52,15 @@ function CoursesPage({ registered_courses, non_registered_courses }: CoursesPage
                       Already Registered
                     </span>
                   </div>
+
+                  <div className="flex justify-center mt-4">
+                    <Link
+                      href={`/courses/${course.id}/overview`}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                    >
+                      View Details
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>
@@ -88,6 +97,14 @@ function CoursesPage({ registered_courses, non_registered_courses }: CoursesPage
                       className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300"
                     >
                       Register for Course
+                    </Link>
+                  </div>
+                  <div className="flex justify-center mt-4">
+                    <Link
+                      href={`/courses/${course.id}/overview`}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                    >
+                      View Details
                     </Link>
                   </div>
                 </div>
