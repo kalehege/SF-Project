@@ -1,7 +1,17 @@
 import { Link } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 
-function ExamsPage() {
+type Exams = {
+  id: number;
+  name: string;
+  description: string;
+};
+
+interface ExamsPageProps {
+  exams: Exams[];
+}
+
+function ExamsPage({ exams }: ExamsPageProps) {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -25,25 +35,36 @@ function ExamsPage() {
           </div>
 
           {/* Course 1 */}
-          <div
-            className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <h2 className="font-bold text-xl text-gray-900">Exams 1</h2>
-            <p className="text-gray-600 mt-2">Simple description</p>
-          </div>
+          {exams.map((exam) => (
+            <div
+              key={exam.id}
+              className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
+            >
+              <h2 className="font-bold text-xl text-gray-900 text-center">
+                <Link
+                  href={`/courses/${exam.id}/overview`}
+                  className="hover:underline block"
+                >
+                  {exam.name}
+                </Link>
+              </h2>
 
-          {/* Course 2 */}
-          <div
-            className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <h2 className="font-bold text-xl text-gray-900">Exams 2</h2>
-            <p className="text-gray-600 mt-2">Simple description</p>
-          </div>
+              <p className="text-gray-600 mt-4 text-center">
+                {exam.description}
+              </p>
 
-          {/* Course 3 */}
-          <div
-            className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300">
-            <h2 className="font-bold text-xl text-gray-900">Exams 3</h2>
-            <p className="text-gray-600 mt-2">Simple description</p>
-          </div>
+              <div className="flex justify-center mt-4">
+                <Link
+                  href={`/courses/${exam.id}/overview`}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
+
+          ))}
+
         </div>
       </div>
     </div>

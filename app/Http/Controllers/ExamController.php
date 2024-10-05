@@ -15,7 +15,11 @@ class ExamController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Exams/Index');
+        $exams = Exam::all();
+
+        return Inertia::render('Exams/Index',[
+            'exams' => $exams
+        ]);
     }
 
     public function create(): Response
