@@ -12,4 +12,9 @@ class ExamController extends Controller
     {
         return Inertia::render('Exams/Index');
     }
+
+    public function create(): Response
+    {
+        return Inertia::render('Exams/Create');
+    }
 }

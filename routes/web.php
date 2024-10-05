@@ -155,6 +155,8 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 
 
     Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
+    Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
+
 
     Route::get('/result', [ResultController::class, 'index'])->name('result.index');
 
