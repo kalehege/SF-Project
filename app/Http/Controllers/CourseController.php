@@ -62,10 +62,17 @@ class CourseController extends Controller
 
     public function indexStudent(): Response
     {
-        $courses = Course::all();
+        $registered_courses = StudentCourse::where('student_id', Auth::id())->with('courses')->get();
+
+        $all_courses = Course::all();
+
+        $registered_course_ids = $registered_courses->pluck('course_id')->toArray();
+
+        $non_registered_courses = Course::whereNotIn('id', $registered_course_ids)->get();
 
         return Inertia::render('Student/Courses/Index',[
-            'courses' => $courses
+            'registered_courses' => $registered_courses->pluck('courses'),
+            'non_registered_courses' => $non_registered_courses,
         ]);
     }
 

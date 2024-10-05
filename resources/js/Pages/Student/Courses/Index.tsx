@@ -6,18 +6,14 @@ type Course = {
   id: number;
   name: string;
   description: string;
-  isRegistered: boolean;  // Assuming we have this flag to indicate if the student is registered
 };
 
 interface CoursesPageProps {
-  courses: Course[];
+  registered_courses: Course[];
+  non_registered_courses: Course[];
 }
 
-function CoursesPage({ courses }: CoursesPageProps) {
-  // Separate registered and non-registered courses
-  const registeredCourses = courses.filter(course => course.isRegistered);
-  const nonRegisteredCourses = courses.filter(course => !course.isRegistered);
-
+function CoursesPage({ registered_courses, non_registered_courses }: CoursesPageProps) {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -28,11 +24,11 @@ function CoursesPage({ courses }: CoursesPageProps) {
         </div>
 
         {/* Registered Courses Section */}
-        {registeredCourses.length > 0 && (
+        {registered_courses.length > 0 && (
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Already Registered Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {registeredCourses.map((course) => (
+              {registered_courses.map((course) => (
                 <div
                   key={course.id}
                   className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
@@ -63,11 +59,11 @@ function CoursesPage({ courses }: CoursesPageProps) {
         )}
 
         {/* Non-Registered Courses Section */}
-        {nonRegisteredCourses.length > 0 && (
+        {non_registered_courses.length > 0 && (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Available Courses</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {nonRegisteredCourses.map((course) => (
+              {non_registered_courses.map((course) => (
                 <div
                   key={course.id}
                   className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
@@ -92,15 +88,6 @@ function CoursesPage({ courses }: CoursesPageProps) {
                       className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300"
                     >
                       Register for Course
-                    </Link>
-                  </div>
-
-                  <div className="flex justify-center mt-4">
-                    <Link
-                      href={`/courses/${course.id}/overview`}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
-                    >
-                      View Details
                     </Link>
                   </div>
                 </div>
