@@ -37,14 +37,31 @@ function CoursesPage({ courses }: CoursesPageProps) {
           {courses.map((course) => (
             <div
               key={course.id}
-              className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300">
+              className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
+            >
               <h2 className="font-bold text-xl text-gray-900 text-center">
-                <Link href={`/courses/${course.id}/overview`} className="hover:underline">
+                <Link
+                  href={`/courses/${course.id}/overview`}
+                  className="hover:underline block"
+                >
                   {course.name}
                 </Link>
               </h2>
-              <p className="text-gray-600 mt-2">{course.description}</p>
+
+              <p className="text-gray-600 mt-4 text-center">
+                {course.description}
+              </p>
+
+              <div className="flex justify-center mt-4">
+                <Link
+                  href={`/courses/${course.id}/overview`}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                >
+                  View Details
+                </Link>
+              </div>
             </div>
+
           ))}
 
         </div>
