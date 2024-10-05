@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('quiz_id')->index();
-            $table->foreign('quiz_id')->references('id')->on('quizzes');
+            $table->unsignedBigInteger('exam_id')->index();
+            $table->foreign('exam_id')->references('id')->on('exams');
             $table->string('question');
             $table->timestamps();
         });
