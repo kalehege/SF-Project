@@ -19,7 +19,7 @@ function CoursesPage({ courses }: CoursesPageProps) {
       <div className="flex-1 p-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-4xl font-extrabold text-gray-900">Courses</h1>
+          <h1 className="text-4xl font-extrabold text-gray-900">Admin Courses</h1>
         </div>
 
         {/* Courses Section */}
