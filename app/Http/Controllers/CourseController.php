@@ -14,7 +14,11 @@ class CourseController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Courses/Index');
+        $courses = Course::all();
+
+        return Inertia::render('Courses/Index',[
+            'courses' => $courses
+        ]);
     }
 
     public function create(): Response
