@@ -155,6 +155,7 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 
     Route::get('/courses', [CourseController::class, 'indexStudent'])->name('courses.index');
     Route::get('/courses/{course_id}/overview', [CourseController::class, 'overviewStudent'])->name('courses.overview');
+    Route::get('/courses/{course_id}/register', [CourseController::class, 'register'])->name('courses.register');
 
 
     Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');

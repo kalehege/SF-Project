@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\StudentCourse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -76,5 +77,18 @@ class CourseController extends Controller
         return Inertia::render('Student/Courses/CourseDetailPage',[
             'course' => $get_course,
         ]);
+    }
+
+    public function register($course_id): RedirectResponse
+    {
+//        dd($course_id);
+
+        $course_register = new StudentCourse();
+        $course_register->student_id = Auth::id();
+        $course_register->course_id  = $course_id;
+        $course_register->save();
+
+        return Redirect::route('courses.index');
+
     }
 }

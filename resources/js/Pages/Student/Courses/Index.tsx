@@ -6,6 +6,7 @@ type Course = {
   id: number;
   name: string;
   description: string;
+  isRegistered: boolean;  // Assuming we have this flag to indicate if the student is registered
 };
 
 interface CoursesPageProps {
@@ -13,6 +14,10 @@ interface CoursesPageProps {
 }
 
 function CoursesPage({ courses }: CoursesPageProps) {
+  // Separate registered and non-registered courses
+  const registeredCourses = courses.filter(course => course.isRegistered);
+  const nonRegisteredCourses = courses.filter(course => !course.isRegistered);
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -22,50 +27,87 @@ function CoursesPage({ courses }: CoursesPageProps) {
           <h1 className="text-4xl font-extrabold text-gray-900">Courses</h1>
         </div>
 
-        {/* Courses Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Add New Course Button */}
-          <div
-            className="p-6 border-2 border-dashed border-gray-300 rounded-md text-center hover:bg-gray-100 transition-colors duration-300">
-            <Link
-              href="/admin/courses/create"
-              className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition-colors duration-300"
-            >
-              ➕ Add New Course
-            </Link>
-          </div>
-
-          {courses.map((course) => (
-            <div
-              key={course.id}
-              className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
-            >
-              <h2 className="font-bold text-xl text-gray-900 text-center">
-                <Link
-                  href={`/courses/${course.id}/overview`}
-                  className="hover:underline block"
+        {/* Registered Courses Section */}
+        {registeredCourses.length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Already Registered Courses</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {registeredCourses.map((course) => (
+                <div
+                  key={course.id}
+                  className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
                 >
-                  {course.name}
-                </Link>
-              </h2>
+                  <h2 className="font-bold text-xl text-gray-900 text-center">
+                    <Link
+                      href={`/courses/${course.id}/overview`}
+                      className="hover:underline block"
+                    >
+                      {course.name}
+                    </Link>
+                  </h2>
 
-              <p className="text-gray-600 mt-4 text-center">
-                {course.description}
-              </p>
+                  <p className="text-gray-600 mt-4 text-center">
+                    {course.description}
+                  </p>
 
-              <div className="flex justify-center mt-4">
-                <Link
-                  href={`/courses/${course.id}/overview`}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
-                >
-                  View Details
-                </Link>
-              </div>
+                  <div className="flex justify-center mt-4">
+                    {/* Button for Already Registered */}
+                    <span className="px-4 py-2 bg-gray-400 text-white rounded-md cursor-default">
+                      Already Registered
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        )}
 
-          ))}
+        {/* Non-Registered Courses Section */}
+        {nonRegisteredCourses.length > 0 && (
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Available Courses</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {nonRegisteredCourses.map((course) => (
+                <div
+                  key={course.id}
+                  className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300"
+                >
+                  <h2 className="font-bold text-xl text-gray-900 text-center">
+                    <Link
+                      href={`/courses/${course.id}/overview`}
+                      className="hover:underline block"
+                    >
+                      {course.name}
+                    </Link>
+                  </h2>
 
-        </div>
+                  <p className="text-gray-600 mt-4 text-center">
+                    {course.description}
+                  </p>
+
+                  <div className="flex justify-center mt-4">
+                    {/* Register for Course Button */}
+                    <Link
+                      href={`/courses/${course.id}/register`}
+                      className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300"
+                    >
+                      Register for Course
+                    </Link>
+                  </div>
+
+                  <div className="flex justify-center mt-4">
+                    <Link
+                      href={`/courses/${course.id}/overview`}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
