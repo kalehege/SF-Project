@@ -27,7 +27,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
           <div
             className="p-6 border-2 border-dashed border-gray-300 rounded-md text-center hover:bg-gray-100 transition-colors duration-300">
             <Link
-              href="/exams/create"
+              href="/Teacher/Exams/create"
               className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition-colors duration-300"
             >
               ➕ Add New Exams
