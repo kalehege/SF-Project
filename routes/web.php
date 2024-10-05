@@ -158,10 +158,10 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/courses/{course_id}/register', [CourseController::class, 'register'])->name('courses.register');
 
 
-    Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
-    Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
-    Route::POST('/exams/store', [ExamController::class, 'store'])->name('exams.store');
-    Route::get('/exams/{exam_id}/overview', [ExamController::class, 'overview'])->name('exams.overview');
+    Route::get('/admin/exams', [ExamController::class, 'index'])->name('admin.exams.index');
+    Route::get('/admin/exams/create', [ExamController::class, 'create'])->name('admin.exams.create');
+    Route::POST('/admin/exams/store', [ExamController::class, 'store'])->name('admin.exams.store');
+    Route::get('/admin/exams/{exam_id}/overview', [ExamController::class, 'overview'])->name('admin.exams.overview');
 
 
     Route::POST('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');

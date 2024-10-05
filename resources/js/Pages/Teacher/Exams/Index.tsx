@@ -27,7 +27,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
           <div
             className="p-6 border-2 border-dashed border-gray-300 rounded-md text-center hover:bg-gray-100 transition-colors duration-300">
             <Link
-              href="/Teacher/Exams/create"
+              href="/admin/exams/create"
               className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition-colors duration-300"
             >
               ➕ Add New Exams
@@ -42,7 +42,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
             >
               <h2 className="font-bold text-xl text-gray-900 text-center">
                 <Link
-                  href={`/exams/${exam.id}/overview`}
+                  href={`/admin/exams/${exam.id}/overview`}
                   className="hover:underline block"
                 >
                   {exam.name}
@@ -55,7 +55,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
 
               <div className="flex justify-center mt-4">
                 <Link
-                  href={`/exams/${exam.id}/overview`}
+                  href={`/admin/exams/${exam.id}/overview`}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
                 >
                   View Details

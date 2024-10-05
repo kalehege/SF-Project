@@ -25,7 +25,7 @@ export default function MainMenu({ className }: MainMenuProps) {
       />
       <MainMenuItem
         text="Exams"
-        link="exams.index"
+        link="admin.exams.index"
         icon={<BookCheck  size={20} />}
       />
       <MainMenuItem

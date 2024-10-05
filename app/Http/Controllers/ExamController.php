@@ -52,7 +52,7 @@ class ExamController extends Controller
 
         $courses->save();
 
-        return Redirect::route('exams.index');
+        return Redirect::route('admin.exams.index');
 
     }
 

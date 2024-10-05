@@ -22,7 +22,7 @@ function AddExamsPage({ courses }: AddExamsPageProps) {
   // Correct the type of the event in the TypeScript declaration
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    post('/exams/store');
+    post('/admin/exams/store');
   };
 
   return (

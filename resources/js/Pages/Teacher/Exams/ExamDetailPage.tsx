@@ -188,7 +188,7 @@ function ExamDetailPage({ exam }: ExamDetailPageProps) {
 
 
         <div className="mt-6">
-          <a href="/exams" className="text-blue-600 hover:underline">
+          <a href="/admin/exams" className="text-blue-600 hover:underline">
             ← Back to Exams
           </a>
         </div>
