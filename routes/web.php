@@ -8,8 +8,10 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,4 +151,11 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 
     Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
 
+    Route::get('/result', [ResultController::class, 'index'])->name('result.index');
+
+
+});
+
+Route::get('/test', function () {
+    return Inertia::render('Result/Index');
 });

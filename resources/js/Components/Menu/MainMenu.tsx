@@ -23,6 +23,11 @@ export default function MainMenu({ className }: MainMenuProps) {
         link="exams.index"
         icon={<Building size={20} />}
       />
+      <MainMenuItem
+        text="Results"
+        link="result.index"
+        icon={<Building size={20} />}
+      />
       {/*<MainMenuItem*/}
       {/*  text="Contacts"*/}
       {/*  link="contacts"*/}
