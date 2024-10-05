@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UsersController;
@@ -158,6 +159,9 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
     Route::POST('/exams/store', [ExamController::class, 'store'])->name('exams.store');
     Route::get('/exams/{exam_id}/overview', [ExamController::class, 'overview'])->name('exams.overview');
+
+
+    Route::POST('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');
 
 
     Route::get('/result', [ResultController::class, 'index'])->name('result.index');
