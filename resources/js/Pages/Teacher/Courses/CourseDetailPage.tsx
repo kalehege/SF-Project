@@ -20,7 +20,7 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
         <p className="text-gray-600 mb-4">{course.description}</p>
 
         <div className="mt-6">
-          <a href="/courses" className="text-blue-600 hover:underline">
+          <a href="/admin/courses" className="text-blue-600 hover:underline">
             ← Back to Courses
           </a>
         </div>

@@ -27,7 +27,7 @@ function CoursesPage({ courses }: CoursesPageProps) {
           <div
             className="p-6 border-2 border-dashed border-gray-300 rounded-md text-center hover:bg-gray-100 transition-colors duration-300">
             <Link
-              href="/Teacher/Courses/create"
+              href="/admin/courses/create"
               className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition-colors duration-300"
             >
               ➕ Add New Course
@@ -41,7 +41,7 @@ function CoursesPage({ courses }: CoursesPageProps) {
             >
               <h2 className="font-bold text-xl text-gray-900 text-center">
                 <Link
-                  href={`/courses/${course.id}/overview`}
+                  href={`/admin/courses/${course.id}/overview`}
                   className="hover:underline block"
                 >
                   {course.name}
@@ -54,7 +54,7 @@ function CoursesPage({ courses }: CoursesPageProps) {
 
               <div className="flex justify-center mt-4">
                 <Link
-                  href={`/courses/${course.id}/overview`}
+                  href={`/admin/courses/${course.id}/overview`}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
                 >
                   View Details

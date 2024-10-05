@@ -11,7 +11,7 @@ function AddCoursePage() {
   // Correct the type of the event in the TypeScript declaration
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    post('/courses/store');
+    post('/admin/courses/store');
   };
 
   return (
