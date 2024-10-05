@@ -10,8 +10,17 @@ type Exams = {
   description: string;
 };
 
+// Define the type for questions and answers in the quiz bank
+type Question = {
+  id: number;
+  question: string;
+  answers: { id: number; answer: string; is_correct: boolean }[];
+};
+
 interface ExamDetailPageProps {
-  exam: Exams;
+  exam: Exams & {
+    questions: Question[];
+  };
 }
 
 function ExamDetailPage({ exam }: ExamDetailPageProps) {
@@ -66,7 +75,7 @@ function ExamDetailPage({ exam }: ExamDetailPageProps) {
           Configure Quiz
         </button>
 
-        {/* Modal Window */}
+        {/* Modal Window for Configuring Quiz */}
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white p-6 rounded-md shadow-lg max-w-md w-full">
@@ -142,6 +151,39 @@ function ExamDetailPage({ exam }: ExamDetailPageProps) {
             </div>
           </div>
         )}
+
+        {/* Quiz Bank: Display List of Existing Quizzes */}
+        {/* Quiz Bank: Display List of Existing Quizzes */}
+        <div className="mt-8">
+          <h2 className="text-3xl font-bold mb-4">Quiz Bank</h2>
+          {exam.questions.length > 0 ? (
+            exam.questions.map((question) => (
+              <div key={question.id} className="mb-6">
+                <h3 className="text-xl font-bold mb-2">{question.question}</h3>
+                <ul className="list-disc ml-5">
+                  {question.answers.map((answer) => (
+                    <li
+                      key={answer.id}
+                      className={`mb-2 ${
+                        answer.is_correct ? 'text-green-600 font-semibold' : 'text-red-600 font-semibold'
+                      }`}
+                    >
+                      {answer.answer}{' '}
+                      {answer.is_correct ? (
+                        <span className="ml-2 text-green-600">✔️</span>
+                      ) : (
+                        <span className="ml-2 text-red-600">❌</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          ) : (
+            <p>No quizzes available for this exam yet.</p>
+          )}
+        </div>
+
 
         <div className="mt-6">
           <a href="/exams" className="text-blue-600 hover:underline">

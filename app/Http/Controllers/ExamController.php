@@ -58,7 +58,8 @@ class ExamController extends Controller
 
     public function overview($exam_id): Response
     {
-        $exam = Exam::where('id',$exam_id)->with('courses')->first();
+        $exam = Exam::where('id',$exam_id)->with('courses','questions.answers')->first();
+
 
 //        dd($exam);
         return Inertia::render('Exams/ExamDetailPage',[
