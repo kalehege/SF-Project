@@ -38,7 +38,11 @@ function CoursesPage({ courses }: CoursesPageProps) {
             <div
               key={course.id}
               className="p-6 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg transition-shadow duration-300">
-              <h2 className="font-bold text-xl text-gray-900 text-center">{course.name}</h2>
+              <h2 className="font-bold text-xl text-gray-900 text-center">
+                <Link href={`/courses/${course.id}/overview`} className="hover:underline">
+                  {course.name}
+                </Link>
+              </h2>
               <p className="text-gray-600 mt-2">{course.description}</p>
             </div>
           ))}
