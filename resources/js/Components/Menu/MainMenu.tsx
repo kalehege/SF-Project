@@ -14,8 +14,13 @@ export default function MainMenu({ className }: MainMenuProps) {
         icon={<CircleGauge size={20} />}
       />
       <MainMenuItem
-        text="Courses"
-        link="courses.index"
+        text="Admin Courses"
+        link="admin.courses.index"
+        icon={<BookOpenText  size={20} />}
+      />
+      <MainMenuItem
+        text="Student Courses"
+        link="admin.courses.index"
         icon={<BookOpenText  size={20} />}
       />
       <MainMenuItem

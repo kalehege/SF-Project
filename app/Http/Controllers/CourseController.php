@@ -45,7 +45,7 @@ class CourseController extends Controller
 
         $courses->save();
 
-        return Redirect::route('courses.index');
+        return Redirect::route('admin.courses.index');
 
     }
 

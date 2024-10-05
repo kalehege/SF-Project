@@ -148,10 +148,10 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
 
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
-    Route::get('/courses/create', [CourseController::class, 'create'])->name('courses.create');
-    Route::POST('/courses/store', [CourseController::class, 'store'])->name('courses.store');
-    Route::get('/courses/{course_id}/overview', [CourseController::class, 'overview'])->name('courses.overview');
+    Route::get('/admin/courses', [CourseController::class, 'index'])->name('admin.courses.index');
+    Route::get('/admin/courses/create', [CourseController::class, 'create'])->name('admin.courses.create');
+    Route::POST('/admin/courses/store', [CourseController::class, 'store'])->name('admin.courses.store');
+    Route::get('/admin/courses/{course_id}/overview', [CourseController::class, 'overview'])->name('admin.courses.overview');
 
 
 
