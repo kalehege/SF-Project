@@ -48,4 +48,14 @@ class CourseController extends Controller
         return Redirect::route('courses.index');
 
     }
+
+    public function overview($course_id): Response
+    {
+        $get_course = Course::find($course_id);
+
+
+        return Inertia::render('Courses/CourseDetailPage',[
+            'course' => $get_course,
+        ]);
+    }
 }
