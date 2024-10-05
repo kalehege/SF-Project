@@ -55,4 +55,12 @@ class ExamController extends Controller
         return Redirect::route('exams.index');
 
     }
+
+    public function overview($exam_id): Response
+    {
+        $exam = Exam::find($exam_id);
+        return Inertia::render('Exams/ExamDetailPage',[
+            'exam' => $exam,
+        ]);
+    }
 }
