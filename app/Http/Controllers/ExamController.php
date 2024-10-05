@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,6 +16,9 @@ class ExamController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Exams/Create');
+        $courses = Course::all();
+        return Inertia::render('Exams/Create', [
+            'courses' => $courses
+        ]);
     }
 }
