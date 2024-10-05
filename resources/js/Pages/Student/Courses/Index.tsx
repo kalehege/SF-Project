@@ -1,4 +1,5 @@
-import { Link } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+import { useState } from 'react';
 // @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
@@ -14,6 +15,29 @@ interface CoursesPageProps {
 }
 
 function CoursesPage({ registered_courses, non_registered_courses }: CoursesPageProps) {
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Form submission hook
+  const { get } = useForm();
+
+  const handleRegisterClick = (course: Course) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
+  };
+
+  const confirmRegistration = () => {
+    if (selectedCourse) {
+      get(`/courses/${selectedCourse.id}/register`);
+    }
+    // Close the modal
+    setIsModalOpen(false);
+  };
+
+  const cancelRegistration = () => {
+    setIsModalOpen(false); 
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Main Content */}
@@ -92,12 +116,12 @@ function CoursesPage({ registered_courses, non_registered_courses }: CoursesPage
 
                   <div className="flex justify-center mt-4">
                     {/* Register for Course Button */}
-                    <Link
-                      href={`/courses/${course.id}/register`}
+                    <button
+                      onClick={() => handleRegisterClick(course)} // Open modal on click
                       className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300"
                     >
                       Register for Course
-                    </Link>
+                    </button>
                   </div>
                   <div className="flex justify-center mt-4">
                     <Link
@@ -109,6 +133,30 @@ function CoursesPage({ registered_courses, non_registered_courses }: CoursesPage
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Confirmation Modal */}
+        {isModalOpen && selectedCourse && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-md shadow-lg max-w-md w-full">
+              <h2 className="text-xl font-bold mb-4">Confirm Registration</h2>
+              <p className="mb-6">Are you sure you want to register for the course "{selectedCourse.name}"?</p>
+              <div className="flex justify-end">
+                <button
+                  onClick={cancelRegistration}
+                  className="px-4 py-2 bg-red-600 text-white rounded-md mr-2"
+                >
+                  No
+                </button>
+                <button
+                  onClick={confirmRegistration}
+                  className="px-4 py-2 bg-green-600 text-white rounded-md"
+                >
+                  Yes
+                </button>
+              </div>
             </div>
           </div>
         )}
