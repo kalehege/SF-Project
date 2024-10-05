@@ -32,7 +32,7 @@ function ExamDetailPage({ exam }: ExamDetailPageProps) {
 
 // Layout usage
 ExamDetailPage.layout = (page: React.ReactNode) => (
-  <MainLayout title="Course Details" children={page} />
+  <MainLayout title="Exam Details" children={page} />
 );
 
 export default ExamDetailPage;
