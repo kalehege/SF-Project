@@ -42,7 +42,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
             >
               <h2 className="font-bold text-xl text-gray-900 text-center">
                 <Link
-                  href={`/courses/${exam.id}/overview`}
+                  href={`/exams/${exam.id}/overview`}
                   className="hover:underline block"
                 >
                   {exam.name}
@@ -55,7 +55,7 @@ function ExamsPage({ exams }: ExamsPageProps) {
 
               <div className="flex justify-center mt-4">
                 <Link
-                  href={`/courses/${exam.id}/overview`}
+                  href={`/exams/${exam.id}/overview`}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
                 >
                   View Details
