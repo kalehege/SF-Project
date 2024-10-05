@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->longText('description');
 
             $table->unsignedBigInteger('assign_user_id')->index();
             $table->foreign('assign_user_id')->references('id')->on('users');
+
+            $table->timestamps();
+
 
         });
     }
