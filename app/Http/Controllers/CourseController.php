@@ -12,4 +12,9 @@ class CourseController extends Controller
     {
         return Inertia::render('Courses/Index');
     }
+
+    public function create(): Response
+    {
+        return Inertia::render('Courses/Create');
+    }
 }
