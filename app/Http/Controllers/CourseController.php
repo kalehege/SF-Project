@@ -16,14 +16,14 @@ class CourseController extends Controller
     {
         $courses = Course::all();
 
-        return Inertia::render('Courses/Index',[
+        return Inertia::render('Teacher/Courses/Index',[
             'courses' => $courses
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Courses/Create');
+        return Inertia::render('Teacher/Courses/Create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -54,7 +54,7 @@ class CourseController extends Controller
         $get_course = Course::find($course_id);
 
 
-        return Inertia::render('Courses/CourseDetailPage',[
+        return Inertia::render('Teacher/Courses/CourseDetailPage',[
             'course' => $get_course,
         ]);
     }

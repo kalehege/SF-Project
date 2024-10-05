@@ -17,7 +17,7 @@ class ExamController extends Controller
     {
         $exams = Exam::all();
 
-        return Inertia::render('Exams/Index',[
+        return Inertia::render('Teacher/Exams/Index',[
             'exams' => $exams
         ]);
     }
@@ -25,7 +25,7 @@ class ExamController extends Controller
     public function create(): Response
     {
         $courses = Course::all();
-        return Inertia::render('Exams/Create', [
+        return Inertia::render('Teacher/Exams/Create', [
             'courses' => $courses
         ]);
     }
@@ -62,7 +62,7 @@ class ExamController extends Controller
 
 
 //        dd($exam);
-        return Inertia::render('Exams/ExamDetailPage',[
+        return Inertia::render('Teacher/Exams/ExamDetailPage',[
             'exam' => $exam,
         ]);
     }
