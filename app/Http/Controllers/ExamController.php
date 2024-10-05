@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Exam;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,5 +24,31 @@ class ExamController extends Controller
         return Inertia::render('Exams/Create', [
             'courses' => $courses
         ]);
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $user = Auth::user();
+//
+        $request->validate([
+            'name' => ['required'],
+            'description' => ['required'],
+            'course_id' => ['required'],
+
+        ]);
+
+//        dd($request->all());
+
+
+        $courses = new Exam();
+        $courses->name = $request->input('name');
+        $courses->description = $request->input('description');
+        $courses->course_id = $request->input('course_id');
+        $courses->assign_user_id = $user->id;
+
+        $courses->save();
+
+        return Redirect::route('exams.index');
+
     }
 }
