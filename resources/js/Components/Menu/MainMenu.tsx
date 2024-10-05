@@ -15,14 +15,14 @@ export default function MainMenu({ className }: MainMenuProps) {
       />
       <MainMenuItem
         text="Courses"
-        link="courses"
+        link="courses.index"
         icon={<BookOpenText  size={20} />}
       />
-      {/*<MainMenuItem*/}
-      {/*  text="Organizations"*/}
-      {/*  link="organizations"*/}
-      {/*  icon={<Building size={20} />}*/}
-      {/*/>*/}
+      <MainMenuItem
+        text="Exams"
+        link="exams.index"
+        icon={<Building size={20} />}
+      />
       {/*<MainMenuItem*/}
       {/*  text="Contacts"*/}
       {/*  link="contacts"*/}

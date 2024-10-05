@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
@@ -143,5 +144,9 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
-    Route::get('/courses', [CourseController::class, 'index'])->name('courses');
+
+    Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
+
+    Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
+
 });
