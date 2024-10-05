@@ -58,4 +58,23 @@ class CourseController extends Controller
             'course' => $get_course,
         ]);
     }
+
+    public function indexStudent(): Response
+    {
+        $courses = Course::all();
+
+        return Inertia::render('Student/Courses/Index',[
+            'courses' => $courses
+        ]);
+    }
+
+    public function overviewStudent($course_id): Response
+    {
+        $get_course = Course::find($course_id);
+
+
+        return Inertia::render('Student/Courses/CourseDetailPage',[
+            'course' => $get_course,
+        ]);
+    }
 }

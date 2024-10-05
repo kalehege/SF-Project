@@ -20,7 +20,7 @@ export default function MainMenu({ className }: MainMenuProps) {
       />
       <MainMenuItem
         text="Student Courses"
-        link="admin.courses.index"
+        link="courses.index"
         icon={<BookOpenText  size={20} />}
       />
       <MainMenuItem
