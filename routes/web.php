@@ -168,6 +168,7 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/exams/{exam}/quizzes', [QuizController::class, 'getQuizzes'])->name('exams.quizzes');
 
     Route::get('/exams/{exam}/quiz', [QuizController::class, 'attendQuiz'])->name('quiz.attend');
+    Route::post('/quiz/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 
 
     Route::get('/result', [ResultController::class, 'index'])->name('result.index');

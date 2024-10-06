@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from '@inertiajs/react';
 // @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
@@ -28,9 +29,14 @@ interface QuizAttendPageProps {
 }
 
 function QuizAttendPage({ exam }: QuizAttendPageProps) {
-  const [selectedAnswers, setSelectedAnswers] = useState<{ [key: number]: number }>({});
   const [timeRemaining, setTimeRemaining] = useState('');
   const [isExamActive, setIsExamActive] = useState(false);
+
+  // Use Inertia's useForm hook to handle form submission
+  const { post, data, setData } = useForm({
+    exam_id: exam.id,
+    selectedAnswers: {},
+  });
 
   // Handle time calculation and countdown
   useEffect(() => {
@@ -73,17 +79,16 @@ function QuizAttendPage({ exam }: QuizAttendPageProps) {
   };
 
   const handleAnswerSelect = (questionId: number, answerId: number) => {
-    setSelectedAnswers((prevAnswers) => ({
-      ...prevAnswers,
+    setData('selectedAnswers', {
+      ...data.selectedAnswers,
       [questionId]: answerId,
-    }));
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Submit the answers to the server
-    console.log('Selected Answers:', selectedAnswers);
+    // Submit the answers to the server via Inertia's post method
+    post('/quiz/submit');
   };
 
   return (
@@ -115,7 +120,7 @@ function QuizAttendPage({ exam }: QuizAttendPageProps) {
                           type="radio"
                           name={`question_${question.id}`}
                           value={answer.id}
-                          checked={selectedAnswers[question.id] === answer.id}
+                          checked={data.selectedAnswers[question.id] === answer.id}
                           onChange={() => handleAnswerSelect(question.id, answer.id)}
                           className="mr-2"
                         />

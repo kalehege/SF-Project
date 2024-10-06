@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\Quiz;
+use App\Models\StudentAnswer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,33 @@ class QuizController extends Controller
         return Inertia::render('Student/Exam/QuizAttendPage', [
             'exam' => $exam,
         ]);
+    }
+
+    public function submitQuiz(Request $request)
+    {
+//        dd($request->all());
+        // Validate the incoming data
+        $validated = $request->validate([
+            'exam_id' => 'required|exists:exams,id',
+            'selectedAnswers' => 'required|array',
+        ]);
+
+        $examId = $validated['exam_id'];
+        $selectedAnswers = $validated['selectedAnswers'];
+
+        // Loop through the selected answers and store them in the database
+        foreach ($selectedAnswers as $questionId => $answerId) {
+            StudentAnswer::create([
+                'student_id' => auth()->id(),   // The currently logged-in student
+                'exam_id' => $examId,
+                'question_id' => $questionId,
+                'answer_id' => $answerId,
+            ]);
+        }
+
+        $get_course_id = Exam::find($examId)->course_id;
+
+        // Return a success message or redirect to a results page
+        return redirect()->route('courses.overview', $get_course_id)->with('success', 'Quiz submitted successfully!');
     }
 }
