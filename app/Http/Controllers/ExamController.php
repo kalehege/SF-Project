@@ -40,6 +40,7 @@ class ExamController extends Controller
             'name' => ['required'],
             'description' => ['required'],
             'course_id' => ['required'],
+            'attempt_count' => ['required'],
             'start_date' => ['required'],
             'end_date' => ['required'],
         ]);
@@ -53,6 +54,7 @@ class ExamController extends Controller
         $courses->start_date = $request->input('start_date');
         $courses->end_date = $request->input('end_date');
         $courses->course_id = $request->input('course_id');
+        $courses->attempt_count = $request->input('attempt_count');
         $courses->assign_user_id = $user->id;
 
         $courses->save();
