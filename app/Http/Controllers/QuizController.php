@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Exam;
 use App\Models\ExamAttempt;
+use App\Models\ExamResult;
 use App\Models\Quiz;
 use App\Models\StudentAnswer;
 use Illuminate\Http\RedirectResponse;
@@ -109,6 +110,40 @@ class QuizController extends Controller
 
         $get_course_id = Exam::find($examId)->course_id;
 
+        $exam = Exam::with(['questions.answers'])->findOrFail($examId);
+
+        $exam_currect = Exam::with(['questions.answers' => function ($query) {
+            $query->where('is_correct', true);
+        }])->findOrFail($examId);
+
+        $studentId = Auth::id();
+        $studentAnswers = StudentAnswer::where('student_id', $studentId)
+            ->where('exam_id', $examId)
+            ->pluck('answer_id', 'question_id')
+            ->toArray();
+
+        $correctAnswersCount = 0;
+        $totalQuestions = $exam->questions->count();
+
+        foreach ($exam_currect->questions as $question) {
+            $correctAnswerId = $question->answers->first()->id;
+            if (isset($studentAnswers[$question->id]) && $studentAnswers[$question->id] == $correctAnswerId) {
+                $correctAnswersCount++;
+            }
+        }
+
+        $scorePercentage = ($correctAnswersCount / $totalQuestions) * 100;
+
+        ExamResult::updateOrCreate(
+            [
+                'student_id' => auth()->id(),
+                'exam_id' => $examId,
+            ],
+            [
+                'score' => $scorePercentage,
+            ]
+        );
+
         return redirect()->route('courses.overview', $get_course_id)->with('success', 'Quiz submitted successfully!');
     }
 
@@ -130,13 +165,23 @@ class QuizController extends Controller
         $totalQuestions = $exam->questions->count();
 
         foreach ($exam_currect->questions as $question) {
-            $correctAnswerId = $question->answers->first()->id; 
+            $correctAnswerId = $question->answers->first()->id;
             if (isset($studentAnswers[$question->id]) && $studentAnswers[$question->id] == $correctAnswerId) {
                 $correctAnswersCount++;
             }
         }
 
         $scorePercentage = ($correctAnswersCount / $totalQuestions) * 100;
+
+        ExamResult::updateOrCreate(
+            [
+                'student_id' => auth()->id(),
+                'exam_id' => $examId,
+            ],
+            [
+                'score' => $scorePercentage,
+            ]
+        );
 
 //        dd($scorePercentage);
 
