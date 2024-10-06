@@ -74,7 +74,7 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
 
                     {/* Show the number of remaining attempts */}
                     <p className="text-gray-600 mb-4">
-                      <span className="font-semibold">Remaining Attempts: </span>{exam.attempt_count}
+                      <span className="font-semibold">Quiz Attempts Count: </span>{exam.attempt_count}
                     </p>
 
                     {/* Conditionally render Attend button or Expired message */}
