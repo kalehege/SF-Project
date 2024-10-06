@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\ExamAttempt;
 use App\Models\Quiz;
 use App\Models\StudentAnswer;
 use Illuminate\Http\RedirectResponse;
@@ -65,6 +66,21 @@ class QuizController extends Controller
     public function attendQuiz(Exam $exam)
     {
         $exam->load('questions.answers');
+
+        $studentId = Auth::id();
+        $maxAttempts = $exam->attempt_count;
+
+        $attempt = ExamAttempt::firstOrNew([
+            'student_id' => $studentId,
+            'exam_id' => $exam->id,
+        ]);
+
+        if ($attempt->exists && $attempt->attempt_count >= $maxAttempts) {
+            return redirect()->back()->with('error', 'You have no attempts left for this exam.');
+        }
+
+        $attempt->attempt_count += 1;
+        $attempt->save();
 
         return Inertia::render('Student/Exam/QuizAttendPage', [
             'exam' => $exam,
