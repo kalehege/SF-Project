@@ -90,7 +90,6 @@ class QuizController extends Controller
     public function submitQuiz(Request $request)
     {
 //        dd($request->all());
-        // Validate the incoming data
         $validated = $request->validate([
             'exam_id' => 'required|exists:exams,id',
             'selectedAnswers' => 'required|array',
@@ -99,10 +98,9 @@ class QuizController extends Controller
         $examId = $validated['exam_id'];
         $selectedAnswers = $validated['selectedAnswers'];
 
-        // Loop through the selected answers and store them in the database
         foreach ($selectedAnswers as $questionId => $answerId) {
             StudentAnswer::create([
-                'student_id' => auth()->id(),   // The currently logged-in student
+                'student_id' => auth()->id(),
                 'exam_id' => $examId,
                 'question_id' => $questionId,
                 'answer_id' => $answerId,
@@ -111,7 +109,23 @@ class QuizController extends Controller
 
         $get_course_id = Exam::find($examId)->course_id;
 
-        // Return a success message or redirect to a results page
         return redirect()->route('courses.overview', $get_course_id)->with('success', 'Quiz submitted successfully!');
     }
+
+    public function showExamResults($examId)
+    {
+        $exam = Exam::with(['questions.answers'])->findOrFail($examId);
+
+        $studentId = Auth::id();
+        $studentAnswers = StudentAnswer::where('student_id', $studentId)
+            ->where('exam_id', $examId)
+            ->pluck('answer_id', 'question_id')
+            ->toArray();
+
+        return Inertia::render('Student/Exam/ResultQuizPage', [
+            'exam' => $exam,
+            'studentAnswers' => $studentAnswers,
+        ]);
+    }
+
 }
