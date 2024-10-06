@@ -130,7 +130,7 @@ class QuizController extends Controller
         $totalQuestions = $exam->questions->count();
 
         foreach ($exam_currect->questions as $question) {
-            $correctAnswerId = $question->answers->first()->id; // Correct answer for the question
+            $correctAnswerId = $question->answers->first()->id; 
             if (isset($studentAnswers[$question->id]) && $studentAnswers[$question->id] == $correctAnswerId) {
                 $correctAnswersCount++;
             }
