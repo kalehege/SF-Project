@@ -78,8 +78,9 @@ class CourseController extends Controller
 
     public function overviewStudent($course_id): Response
     {
-        $get_course = Course::find($course_id);
+        $get_course = Course::where('id',$course_id)->with('exams')->first();
 
+//        dd($get_course);
 
         return Inertia::render('Student/Courses/CourseDetailPage',[
             'course' => $get_course,
