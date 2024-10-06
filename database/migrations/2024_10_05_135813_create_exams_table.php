@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date');
 
+            $table->string('attempt_count');
+
             $table->unsignedBigInteger('assign_user_id')->index();
             $table->foreign('assign_user_id')->references('id')->on('users');
 
