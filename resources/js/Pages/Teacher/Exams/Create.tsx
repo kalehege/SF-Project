@@ -17,9 +17,11 @@ function AddExamsPage({ courses }: AddExamsPageProps) {
     name: '',
     description: '',
     course_id: '', // This will hold the selected course category
+    start_date: '', // Holds the start date and time
+    end_date: '',   // Holds the end date and time
   });
 
-  // Correct the type of the event in the TypeScript declaration
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     post('/admin/exams/store');
@@ -75,6 +77,36 @@ function AddExamsPage({ courses }: AddExamsPageProps) {
             onChange={(e) => setData('description', e.target.value)}
           ></textarea>
           {errors.description && <span className="text-red-600 text-sm">{errors.description}</span>}
+        </div>
+
+        {/* Start Date */}
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2" htmlFor="start_date">
+            Start Date and Time
+          </label>
+          <input
+            id="start_date"
+            type="datetime-local"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            value={data.start_date}
+            onChange={(e) => setData('start_date', e.target.value)}
+          />
+          {errors.start_date && <span className="text-red-600 text-sm">{errors.start_date}</span>}
+        </div>
+
+        {/* End Date */}
+        <div className="mb-4">
+          <label className="block text-sm font-bold mb-2" htmlFor="end_date">
+            End Date and Time
+          </label>
+          <input
+            id="end_date"
+            type="datetime-local"
+            className="w-full p-2 border border-gray-300 rounded-md"
+            value={data.end_date}
+            onChange={(e) => setData('end_date', e.target.value)}
+          />
+          {errors.end_date && <span className="text-red-600 text-sm">{errors.end_date}</span>}
         </div>
 
         <button

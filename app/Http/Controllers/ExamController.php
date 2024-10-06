@@ -32,13 +32,16 @@ class ExamController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+//        dd($request->all());
+
         $user = Auth::user();
 //
         $request->validate([
             'name' => ['required'],
             'description' => ['required'],
             'course_id' => ['required'],
-
+            'start_date' => ['required'],
+            'end_date' => ['required'],
         ]);
 
 //        dd($request->all());
@@ -47,6 +50,8 @@ class ExamController extends Controller
         $courses = new Exam();
         $courses->name = $request->input('name');
         $courses->description = $request->input('description');
+        $courses->start_date = $request->input('start_date');
+        $courses->end_date = $request->input('end_date');
         $courses->course_id = $request->input('course_id');
         $courses->assign_user_id = $user->id;
 
