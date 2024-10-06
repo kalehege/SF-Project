@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->longText('description');
 
+            $table->string('start_date');
+            $table->string('end_date');
+
             $table->unsignedBigInteger('assign_user_id')->index();
             $table->foreign('assign_user_id')->references('id')->on('users');
 
