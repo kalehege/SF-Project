@@ -78,7 +78,7 @@ class CourseController extends Controller
 
     public function overviewStudent($course_id): Response
     {
-        $get_course = Course::where('id',$course_id)->with('exams')->first();
+        $get_course = Course::where('id',$course_id)->with('exams','exams.questions')->first();
 
 //        dd($get_course);
 

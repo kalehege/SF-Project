@@ -2,6 +2,12 @@ import React from 'react';
 // @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
+// Define the type for a question
+type Question = {
+  id: number;
+  question_text: string;
+};
+
 // Define the type for an exam
 type Exam = {
   id: number;
@@ -9,6 +15,7 @@ type Exam = {
   description: string;
   start_date: string;
   end_date: string;
+  questions: Question[]; // Add questions to the exam type
 };
 
 // Define the type for a course
@@ -41,6 +48,7 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
               {course.exams.map((exam) => {
                 const examEndDate = new Date(exam.end_date);
                 const isExpired = examEndDate < currentDate;
+                const questionsCount = exam.questions.length; // Count the questions
 
                 return (
                   <li
@@ -57,6 +65,11 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                       <span className="font-semibold">End Time: </span>
                       <span>{new Date(exam.end_date).toLocaleString()}</span>
                     </div>
+
+                    {/* Show the number of questions */}
+                    <p className="text-gray-600 mb-4">
+                      <span className="font-semibold">Questions Count: </span>{questionsCount}
+                    </p>
 
                     {/* Conditionally render Attend button or Expired message */}
                     <div className="mt-6">
