@@ -5,21 +5,36 @@ import MainLayout from '@/Layouts/MainLayout';  // Ensure correct path
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-function ResultsPage() {
-  // Sample data for the table
-  const [results] = useState([
-    { id: 1, exam: 'Exam 1', result: 80, rank: 5 },
-    { id: 2, exam: 'Exam 2', result: 70, rank: 10 },
-    { id: 3, exam: 'Exam 3', result: 60, rank: 15 },
-  ]);
+interface Result {
+  id: number;
+  exam: string;
+  result: number;
+  student_name: string; // Student name added here
+}
+
+interface ResultsPageProps {
+  allResults: Result[];  // An array of all exam results
+}
+
+function ResultsPage({ allResults }: ResultsPageProps) {
+  // State to track the selected exam
+  const [selectedExam, setSelectedExam] = useState('');
+
+  // Get a list of unique exam names for the filter dropdown
+  const uniqueExams = Array.from(new Set(allResults.map(result => result.exam)));
+
+  // Filter results based on the selected exam
+  const filteredResults = selectedExam
+    ? allResults.filter(result => result.exam === selectedExam)
+    : allResults;
 
   // Data for the bar chart
   const chartData = {
-    labels: results.map((item) => item.exam),
+    labels: filteredResults.map((item) => item.student_name),  // Show student names in the chart
     datasets: [
       {
         label: 'Marks',
-        data: results.map((item) => item.result),
+        data: filteredResults.map((item) => item.result),
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
@@ -27,36 +42,47 @@ function ResultsPage() {
     ],
   };
 
+  const handleExamChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedExam(event.target.value);
+  };
+
   return (
     <div className="min-h-screen p-8 bg-gray-50">
       <h1 className="text-3xl font-bold mb-8">Results</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Section: Table */}
+        {/* Left Section: Filter Dropdown and Table */}
         <div>
           <div className="mb-4">
-            <select className="p-2 border border-gray-300 rounded-md">
-              <option value="">Filter Subject</option>
-              <option value="subject1">Subject 1</option>
-              <option value="subject2">Subject 2</option>
+            <select
+              value={selectedExam}
+              onChange={handleExamChange}
+              className="p-2 border border-gray-300 rounded-md"
+            >
+              <option value="">Filter by Exam</option>
+              {uniqueExams.map((exam, index) => (
+                <option key={index} value={exam}>
+                  {exam}
+                </option>
+              ))}
             </select>
           </div>
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 p-2">#</th>
+              <th className="border border-gray-300 p-2">Student Name</th>
               <th className="border border-gray-300 p-2">Exam</th>
               <th className="border border-gray-300 p-2">Result</th>
-              <th className="border border-gray-300 p-2">Rank</th>
             </tr>
             </thead>
             <tbody>
-            {results.map((result) => (
+            {filteredResults.map((result) => (
               <tr key={result.id} className="text-center">
                 <td className="border border-gray-300 p-2">{result.id}</td>
+                <td className="border border-gray-300 p-2">{result.student_name}</td> {/* Display student name */}
                 <td className="border border-gray-300 p-2">{result.exam}</td>
                 <td className="border border-gray-300 p-2">{result.result}</td>
-                <td className="border border-gray-300 p-2">{result.rank}</td>
               </tr>
             ))}
             </tbody>
@@ -71,10 +97,10 @@ function ResultsPage() {
               responsive: true,
               plugins: {
                 legend: { display: false },
-                title: { display: true, text: 'Marks vs Exams' },
+                title: { display: true, text: `Marks for ${selectedExam || 'All Exams'}` },
               },
               scales: {
-                x: { title: { display: true, text: 'Exams' } },
+                x: { title: { display: true, text: 'Students' } },
                 y: { title: { display: true, text: 'Marks' }, min: 0, max: 100 },
               },
             }}
