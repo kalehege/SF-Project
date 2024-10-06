@@ -80,20 +80,27 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                     {/* Conditionally render Attend button or Expired message */}
                     <div className="mt-6">
                       {isExpired ? (
-                        <span className="text-red-600 font-semibold">Exam has expired</span>
-                      ) : (
-                        exam.attempt_count > 0 ? (
+                        <>
+                          <span className="text-red-600 font-semibold">Exam has expired</span>
                           <a
-                            href={`/exams/${exam.id}/quiz`}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                            href={`/exams/${exam.id}/results`}
+                            className="ml-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500 transition-colors duration-300"
                           >
-                            Attend to Quiz
+                            View Results
                           </a>
-                        ) : (
-                          <span className="text-gray-600 font-semibold">No attempts remaining</span>
-                        )
+                        </>
+                      ) : exam.attempt_count > 0 ? (
+                        <a
+                          href={`/exams/${exam.id}/quiz`}
+                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                        >
+                          Attend to Quiz
+                        </a>
+                      ) : (
+                        <span className="text-gray-600 font-semibold">No attempts remaining</span>
                       )}
                     </div>
+
                   </li>
                 );
               })}
