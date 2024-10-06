@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class QuizController extends Controller
 {
@@ -58,5 +59,14 @@ class QuizController extends Controller
 //
 //        return Redirect::route('exams.index');
 
+    }
+
+    public function attendQuiz(Exam $exam)
+    {
+        $exam->load('questions.answers');
+
+        return Inertia::render('Student/Exam/QuizAttendPage', [
+            'exam' => $exam,
+        ]);
     }
 }

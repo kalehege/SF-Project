@@ -77,10 +77,10 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                         <span className="text-red-600 font-semibold">Exam has expired</span>
                       ) : (
                         <a
-                          href={`/exams/${exam.id}`}
+                          href={`/exams/${exam.id}/quiz`}
                           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
                         >
-                          Attend to Exam
+                          Attend to Quiz
                         </a>
                       )}
                     </div>
@@ -92,7 +92,7 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
         )}
 
         <div className="mt-6">
-          <a href="/courses" className="text-blue-600 hover:underline">
+        <a href="/courses" className="text-blue-600 hover:underline">
             ← Back to Courses
           </a>
         </div>
