@@ -116,15 +116,36 @@ class QuizController extends Controller
     {
         $exam = Exam::with(['questions.answers'])->findOrFail($examId);
 
+        $exam_currect = Exam::with(['questions.answers' => function ($query) {
+            $query->where('is_correct', true);
+        }])->findOrFail($examId);
+
         $studentId = Auth::id();
         $studentAnswers = StudentAnswer::where('student_id', $studentId)
             ->where('exam_id', $examId)
             ->pluck('answer_id', 'question_id')
             ->toArray();
 
+        $correctAnswersCount = 0;
+        $totalQuestions = $exam->questions->count();
+
+        foreach ($exam_currect->questions as $question) {
+            $correctAnswerId = $question->answers->first()->id; // Correct answer for the question
+            if (isset($studentAnswers[$question->id]) && $studentAnswers[$question->id] == $correctAnswerId) {
+                $correctAnswersCount++;
+            }
+        }
+
+        $scorePercentage = ($correctAnswersCount / $totalQuestions) * 100;
+
+//        dd($scorePercentage);
+
         return Inertia::render('Student/Exam/ResultQuizPage', [
             'exam' => $exam,
             'studentAnswers' => $studentAnswers,
+            'correctAnswersCount' => $correctAnswersCount,
+            'totalQuestions' => $totalQuestions,
+            'scorePercentage' => $scorePercentage,
         ]);
     }
 

@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import MainLayout from '@/Layouts/MainLayout';
 
-// Define the types for the question and answer
+// Define types for question and answer
 type Answer = {
   id: number;
   answer: string;
@@ -22,17 +22,23 @@ type Exam = {
   questions: Question[];
 };
 
-type StudentAnswer = {
-  [question_id: number]: number; // This represents studentAnswers with question_id as key and answer_id as value
-};
-
 interface ExamResultsPageProps {
   exam: Exam;
-  studentAnswers: StudentAnswer;
+  studentAnswers: { [key: number]: number }; // Student's answers: question_id => answer_id
+  correctAnswersCount: number;
+  totalQuestions: number;
+  scorePercentage: number;
 }
 
-function ExamResultsPage({ exam, studentAnswers }: ExamResultsPageProps) {
-  // Create a helper function to check if the student's answer is correct
+function ExamResultsPage({
+                           exam,
+                           studentAnswers,
+                           correctAnswersCount,
+                           totalQuestions,
+                           scorePercentage,
+                         }: ExamResultsPageProps) {
+
+  // Helper function to check if the student's answer is correct
   const isStudentAnswerCorrect = (questionId: number, answerId: number) => {
     const correctAnswer = exam.questions
       .find((q) => q.id === questionId)
@@ -48,10 +54,17 @@ function ExamResultsPage({ exam, studentAnswers }: ExamResultsPageProps) {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">{exam.name}</h1>
         <p className="text-gray-600 mb-4">{exam.description}</p>
 
+        {/* Display the score */}
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-green-600">
+            You scored: {correctAnswersCount} / {totalQuestions}
+          </h2>
+          <p className="text-xl">Percentage: {scorePercentage.toFixed(2)}%</p>
+        </div>
+
         {/* Display the questions and answers */}
         {exam.questions.map((question) => {
-          // Find the student's selected answer for the current question
-          const studentAnswerId = studentAnswers[question.id]; // Accessing the student's selected answer
+          const studentAnswerId = studentAnswers[question.id];
 
           return (
             <div key={question.id} className="mb-6">
@@ -64,28 +77,28 @@ function ExamResultsPage({ exam, studentAnswers }: ExamResultsPageProps) {
                       answer.is_correct ? 'text-green-600' : 'text-gray-600'
                     }`}
                   >
-                    {/* Display ✔️ for the correct answer and ❌ for wrong student's answer */}
+                    {/* Show correct and incorrect answers */}
                     <span className="mr-2">
                       {answer.is_correct ? '✔️' : ''}
                       {studentAnswerId === answer.id && !answer.is_correct && '❌'}
                     </span>
                     <span>{answer.answer}</span>
 
-                    {/* Show feedback for student's answer */}
+                    {/* Feedback for the student's answer */}
                     {studentAnswerId === answer.id && (
                       <span
                         className={`ml-4 ${isStudentAnswerCorrect(question.id, studentAnswerId) ? 'text-green-500' : 'text-red-500'}`}
                       >
                         {isStudentAnswerCorrect(question.id, studentAnswerId)
-                          ? 'Your answer was correct'
-                          : 'Your answer was incorrect'}
+                          ? 'Correct'
+                          : 'Incorrect'}
                       </span>
                     )}
                   </li>
                 ))}
               </ul>
 
-              {/* If student's answer was wrong, show the correct answer explicitly */}
+              {/* Show the correct answer if the student answered incorrectly */}
               {studentAnswerId && !isStudentAnswerCorrect(question.id, studentAnswerId) && (
                 <div className="mt-2 text-sm text-green-500">
                   Correct Answer: {question.answers.find((a) => a.is_correct)?.answer}
