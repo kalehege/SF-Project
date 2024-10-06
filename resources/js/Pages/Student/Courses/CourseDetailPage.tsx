@@ -16,6 +16,7 @@ type Exam = {
   start_date: string;
   end_date: string;
   questions: Question[]; // Add questions to the exam type
+  attempt_count: number; // Add attempt_count to the exam type
 };
 
 // Define the type for a course
@@ -67,8 +68,13 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                     </div>
 
                     {/* Show the number of questions */}
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-600 mb-2">
                       <span className="font-semibold">Questions Count: </span>{questionsCount}
+                    </p>
+
+                    {/* Show the number of remaining attempts */}
+                    <p className="text-gray-600 mb-4">
+                      <span className="font-semibold">Remaining Attempts: </span>{exam.attempt_count}
                     </p>
 
                     {/* Conditionally render Attend button or Expired message */}
@@ -76,12 +82,16 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                       {isExpired ? (
                         <span className="text-red-600 font-semibold">Exam has expired</span>
                       ) : (
-                        <a
-                          href={`/exams/${exam.id}/quiz`}
-                          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
-                        >
-                          Attend to Quiz
-                        </a>
+                        exam.attempt_count > 0 ? (
+                          <a
+                            href={`/exams/${exam.id}/quiz`}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-colors duration-300"
+                          >
+                            Attend to Quiz
+                          </a>
+                        ) : (
+                          <span className="text-gray-600 font-semibold">No attempts remaining</span>
+                        )
                       )}
                     </div>
                   </li>
@@ -92,7 +102,7 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
         )}
 
         <div className="mt-6">
-        <a href="/courses" className="text-blue-600 hover:underline">
+          <a href="/courses" className="text-blue-600 hover:underline">
             ← Back to Courses
           </a>
         </div>
