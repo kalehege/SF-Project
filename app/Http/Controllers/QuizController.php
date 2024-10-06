@@ -45,7 +45,7 @@ class QuizController extends Controller
             ]);
         }
 
-        return redirect()->route('exams.overview', $exam->id);
+        return redirect()->route('admin.exams.overview', $exam->id);
 //
 //
 //        $courses = new Exam();
