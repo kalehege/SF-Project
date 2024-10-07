@@ -12,7 +12,7 @@ const Create = () => {
     last_name: '',
     email: '',
     password: '',
-    owner: '0',
+    owner: '3',
     photo: ''
   });
 
@@ -87,15 +87,17 @@ const Create = () => {
               />
             </FieldGroup>
 
-            <FieldGroup label="Owner" name="owner" error={errors.owner}>
+            <FieldGroup label="Type" name="owner" error={errors.owner}>
               <SelectInput
                 name="owner"
                 error={errors.owner}
                 value={data.owner}
                 onChange={e => setData('owner', e.target.value)}
                 options={[
-                  { value: '1', label: 'Yes' },
-                  { value: '0', label: 'No' }
+                  { value: '3', label: 'Student' },
+                  { value: '1', label: 'Super Admin' },
+                  { value: '2', label: 'Teacher' },
+
                 ]}
               />
             </FieldGroup>
