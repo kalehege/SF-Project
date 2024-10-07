@@ -20,7 +20,7 @@ export default function MainLayout({ title, children }: MainLayoutProps) {
             <BottomHeader />
           </div>
           <div className="flex flex-grow overflow-hidden">
-            <MainMenu className="flex-shrink-0 hidden w-56 p-12 overflow-y-auto bg-blue-950	 md:block" />
+            <MainMenu className="flex-shrink-0 hidden w-56 p-12 overflow-y-auto bg-gray-800	 md:block" />
             {/**
              * We need to scroll the content of the page, not the whole page.
              * So we need to add `scroll-region="true"` to the div below.
