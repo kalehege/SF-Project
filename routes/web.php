@@ -118,7 +118,7 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
-    
+
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 
