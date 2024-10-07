@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email', 50)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('owner')->default(false);
+            $table->string('owner')->default(3);
             $table->string('photo', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();
