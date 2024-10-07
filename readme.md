@@ -50,16 +50,10 @@ Run artisan server:
 php artisan serve
 ```
 
-You're ready to go! [Visit Ping CRM](http://127.0.0.1:8000/) in your browser, and login with:
+You're ready to go! [SF Campus](http://127.0.0.1:8000/) in your browser, and login with:
 
-- **Username:** johndoe@example.com
-- **Password:** secret
+- **Username:** admin@example.com
+- **Password:** admin@example.com
 
-## Running tests
 
-To run the Ping CRM tests, run:
-
-```
-php artisan test
-```
 
