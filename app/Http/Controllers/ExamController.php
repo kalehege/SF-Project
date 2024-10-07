@@ -74,4 +74,21 @@ class ExamController extends Controller
             'courses' => $courses
         ]);
     }
+
+    public function update(Request $request, Exam $exam)
+    {
+        $validated = $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'attempt_count' => 'required|integer|min:1',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+        ]);
+
+        $exam->update($validated);
+
+        return redirect()->route('admin.exams.overview', $exam->id)->with('success', 'Exam updated successfully!');
+    }
+
 }
