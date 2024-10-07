@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
                     DB::table('answers')->insert([
                         'question_id' => $questionId,
                         'answer' => 'Sample Answer ' . $j . ' for Question ' . $i,
-                        'is_correct' => ($j === $correctAnswerIndex), 
+                        'is_correct' => ($j === $correctAnswerIndex),
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now(),
                     ]);
