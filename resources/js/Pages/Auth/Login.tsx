@@ -9,8 +9,8 @@ import { CheckboxInput } from '@/Components/Form/CheckboxInput';
 
 export default function LoginPage() {
   const { data, setData, errors, post, processing } = useForm({
-    email: 'johndoe@example.com',
-    password: 'secret',
+    email: 'admin@example.com',
+    password: 'admin@example.com',
     remember: true
   });
 
