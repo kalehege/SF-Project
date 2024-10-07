@@ -13,15 +13,17 @@ export default function MainMenu({ className }: MainMenuProps) {
         link="dashboard"
         icon={<CircleGauge size={20} />}
       />
-      <MainMenuItem
-        text="Admin Courses"
-        link="admin.courses.index"
-        icon={<BookOpenText  size={20} />}
-      />
+
       <MainMenuItem
         text="Student Courses"
         link="courses.index"
         icon={<BookOpenText  size={20} />}
+      />
+
+      <MainMenuItem
+        text="Results"
+        link="result.index"
+        icon={<CheckCheck  size={20} />}
       />
       <MainMenuItem
         text="Exams"
@@ -29,9 +31,9 @@ export default function MainMenu({ className }: MainMenuProps) {
         icon={<BookCheck  size={20} />}
       />
       <MainMenuItem
-        text="Results"
-        link="result.index"
-        icon={<CheckCheck  size={20} />}
+        text="Admin Courses"
+        link="admin.courses.index"
+        icon={<BookOpenText  size={20} />}
       />
       {/*<MainMenuItem*/}
       {/*  text="Contacts"*/}
