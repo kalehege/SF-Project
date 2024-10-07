@@ -1,13 +1,16 @@
-import { Link } from '@inertiajs/react';
+import { Link,usePage  } from '@inertiajs/react';
 import MainLayout from '@/Layouts/MainLayout';
 import { Briefcase, BookOpen, Calendar, Users, ShieldAlert } from 'lucide-react';
 
 function DashboardPage() {
+  const { props } = usePage();  // Get all page props
+  const user = props.auth.user;
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       {/* Welcome Section */}
       <div className="bg-blue-600 text-white p-8 rounded-lg shadow-md mb-8">
-        <h1 className="text-4xl font-bold mb-4">Welcome to SF Campus</h1>
+        <h1 className="text-4xl font-bold mb-4">Welcome to SF Campus, { user.first_name } { user.last_name }</h1>
         <p className="text-lg">Your academic journey starts here. Explore courses, track progress, and stay updated with the latest events.</p>
       </div>
 
@@ -32,7 +35,7 @@ function DashboardPage() {
         </Link>
 
         {/* Profile */}
-        <Link href="/users/1/edit" className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+        <Link href={`/users/${user.id}/edit`} className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
           <div className="flex items-center mb-4">
             <Users className="text-green-600 w-12 h-12 mr-4" />
             <h2 className="text-xl font-bold">Profile</h2>
