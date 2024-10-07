@@ -152,6 +152,8 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::get('/admin/courses/create', [CourseController::class, 'create'])->name('admin.courses.create');
     Route::POST('/admin/courses/store', [CourseController::class, 'store'])->name('admin.courses.store');
     Route::get('/admin/courses/{course_id}/overview', [CourseController::class, 'overview'])->name('admin.courses.overview');
+    Route::put('/admin/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
+
 
     Route::get('/courses', [CourseController::class, 'indexStudent'])->name('courses.index');
     Route::get('/courses/{course_id}/overview', [CourseController::class, 'overviewStudent'])->name('courses.overview');

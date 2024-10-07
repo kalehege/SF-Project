@@ -87,6 +87,19 @@ class CourseController extends Controller
         ]);
     }
 
+    public function update(Request $request, Course $course)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $course->update($validated);
+
+        return redirect()->route('admin.courses.overview', $course)->with('success', 'Course updated successfully!');
+    }
+
+
     public function register($course_id): RedirectResponse
     {
 //        dd($course_id);
