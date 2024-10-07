@@ -25,7 +25,25 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => 'admin@example.com',
-            'owner' => true,
+            'owner' => 1,
+        ]);
+
+        User::factory()->create([
+            'account_id' => $account->id,
+            'first_name' => 'Ms',
+            'last_name' => 'Lecture',
+            'email' => 'lecture@example.com',
+            'password' => 'lecture@example.com',
+            'owner' => 2,
+        ]);
+
+        User::factory()->create([
+            'account_id' => $account->id,
+            'first_name' => 'Mr',
+            'last_name' => 'Student',
+            'email' => 'student@example.com',
+            'password' => 'student@example.com',
+            'owner' => 3,
         ]);
 
         DB::table('courses')->insert([
@@ -60,7 +78,7 @@ class DatabaseSeeder extends Seeder
                 'start_date' => Carbon::now()->addDays(5),
                 'end_date' => Carbon::now()->addDays(7),
                 'attempt_count' => 3,
-                'assign_user_id' => 1,
+                'assign_user_id' => 2,
                 'course_id' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -71,7 +89,7 @@ class DatabaseSeeder extends Seeder
                 'start_date' => Carbon::now()->addDays(15),
                 'end_date' => Carbon::now()->addDays(17),
                 'attempt_count' => 2,
-                'assign_user_id' => 1,
+                'assign_user_id' => 2,
                 'course_id' => 2,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
@@ -82,7 +100,7 @@ class DatabaseSeeder extends Seeder
                 'start_date' => Carbon::now()->addDays(2),
                 'end_date' => Carbon::now()->addDays(3),
                 'attempt_count' => 1,
-                'assign_user_id' => 1,
+                'assign_user_id' => 2,
                 'course_id' => 3,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
