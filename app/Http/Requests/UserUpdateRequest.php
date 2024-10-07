@@ -23,6 +23,7 @@ class UserUpdateRequest extends FormRequest
             'email' => ['required', 'max:50', 'email'],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
+            'type' => ['required'],
             'photo' => ['nullable', 'image'],
         ];
     }
