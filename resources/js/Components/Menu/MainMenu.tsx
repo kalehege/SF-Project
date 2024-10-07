@@ -25,6 +25,9 @@ export default function MainMenu({ className }: MainMenuProps) {
         link="result.index"
         icon={<CheckCheck  size={20} />}
       />
+      {/* Separator */}
+      <hr className="my-4 border-gray-300" />
+      
       <MainMenuItem
         text="Exams"
         link="admin.exams.index"
@@ -35,16 +38,6 @@ export default function MainMenu({ className }: MainMenuProps) {
         link="admin.courses.index"
         icon={<BookOpenText  size={20} />}
       />
-      {/*<MainMenuItem*/}
-      {/*  text="Contacts"*/}
-      {/*  link="contacts"*/}
-      {/*  icon={<Users size={20} />}*/}
-      {/*/>*/}
-      {/*<MainMenuItem*/}
-      {/*  text="Reports"*/}
-      {/*  link="reports"*/}
-      {/*  icon={<Printer size={20} />}*/}
-      {/*/>*/}
     </div>
   );
 }
