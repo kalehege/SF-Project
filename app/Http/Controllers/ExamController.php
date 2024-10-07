@@ -66,11 +66,12 @@ class ExamController extends Controller
     public function overview($exam_id): Response
     {
         $exam = Exam::where('id',$exam_id)->with('courses','questions.answers')->first();
-
+        $courses = Course::all();
 
 //        dd($exam);
         return Inertia::render('Teacher/Exams/ExamDetailPage',[
             'exam' => $exam,
+            'courses' => $courses
         ]);
     }
 }
