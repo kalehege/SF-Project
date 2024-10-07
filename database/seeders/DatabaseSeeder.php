@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => 'admin@example.com',
             'owner' => 1,
+            'type' => 'admin',
         ]);
 
         User::factory()->create([
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'lecture@example.com',
             'password' => 'lecture@example.com',
             'owner' => 2,
+            'type' => 'lecture',
         ]);
 
         User::factory()->create([
@@ -44,6 +46,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'student@example.com',
             'password' => 'student@example.com',
             'owner' => 3,
+            'type' => 'student',
         ]);
 
         DB::table('courses')->insert([
