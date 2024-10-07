@@ -5,6 +5,7 @@ import TextInput from '@/Components/Form/TextInput';
 import SelectInput from '@/Components/Form/SelectInput';
 import FileInput from '@/Components/Form/FileInput';
 import FieldGroup from '@/Components/Form/FieldGroup';
+import React from 'react';
 
 const Create = () => {
   const { data, setData, errors, post, processing } = useForm({
@@ -12,7 +13,7 @@ const Create = () => {
     last_name: '',
     email: '',
     password: '',
-    owner: '3',
+    type: '',
     photo: ''
   });
 
@@ -87,17 +88,16 @@ const Create = () => {
               />
             </FieldGroup>
 
-            <FieldGroup label="Type" name="owner" error={errors.owner}>
+            <FieldGroup label="Type" name="type" error={errors.type}>
               <SelectInput
                 name="owner"
-                error={errors.owner}
-                value={data.owner}
-                onChange={e => setData('owner', e.target.value)}
+                error={errors.type}
+                value={data.type}
+                onChange={e => setData('type', e.target.value)}
                 options={[
-                  { value: '3', label: 'Student' },
-                  { value: '1', label: 'Super Admin' },
-                  { value: '2', label: 'Teacher' },
-
+                  { value: 'admin', label: 'Admin' },
+                  { value: 'lecture', label: 'Lecture' },
+                  { value: 'student', label: 'Student' }
                 ]}
               />
             </FieldGroup>
