@@ -27,7 +27,7 @@ export default function MainMenu({ className }: MainMenuProps) {
       />
       {/* Separator */}
       <hr className="my-4 border-gray-300" />
-      
+
       <MainMenuItem
         text="Exams"
         link="admin.exams.index"
@@ -36,6 +36,11 @@ export default function MainMenu({ className }: MainMenuProps) {
       <MainMenuItem
         text="Admin Courses"
         link="admin.courses.index"
+        icon={<BookOpenText  size={20} />}
+      />
+      <MainMenuItem
+        text="Admin User Manage"
+        link="users"
         icon={<BookOpenText  size={20} />}
       />
     </div>
