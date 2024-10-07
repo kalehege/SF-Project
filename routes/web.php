@@ -40,39 +40,10 @@ Route::delete('logout', [LoginController::class, 'destroy'])
 
 // Dashboard
 
-Route::get('/', [DashboardController::class, 'index'])
-    ->name('dashboard')
-    ->middleware('auth');
 
 // Users
 
-Route::get('users', [UsersController::class, 'index'])
-    ->name('users')
-    ->middleware('auth');
 
-Route::get('users/create', [UsersController::class, 'create'])
-    ->name('users.create')
-    ->middleware('auth');
-
-Route::post('users', [UsersController::class, 'store'])
-    ->name('users.store')
-    ->middleware('auth');
-
-Route::get('users/{user}/edit', [UsersController::class, 'edit'])
-    ->name('users.edit')
-    ->middleware('auth');
-
-Route::put('users/{user}', [UsersController::class, 'update'])
-    ->name('users.update')
-    ->middleware('auth');
-
-Route::delete('users/{user}', [UsersController::class, 'destroy'])
-    ->name('users.destroy')
-    ->middleware('auth');
-
-Route::put('users/{user}/restore', [UsersController::class, 'restore'])
-    ->name('users.restore')
-    ->middleware('auth');
 
 // Organizations
 
@@ -147,6 +118,9 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 Route::group(['middleware' => ['auth', 'verified']], function(){
+    
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
 
     Route::get('/admin/courses', [CourseController::class, 'index'])->name('admin.courses.index');
     Route::get('/admin/courses/create', [CourseController::class, 'create'])->name('admin.courses.create');
@@ -176,6 +150,15 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
 
 
     Route::get('/result', [ResultController::class, 'index'])->name('result.index');
+
+
+    Route::get('users', [UsersController::class, 'index'])->name('users');
+    Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::post('users', [UsersController::class, 'store'])->name('users.store');
+    Route::get('users/{user}/edit', [UsersController::class, 'edit'])->name('users.edit');
+    Route::put('users/{user}', [UsersController::class, 'update'])->name('users.update');
+    Route::delete('users/{user}', [UsersController::class, 'destroy'])->name('users.destroy');
+    Route::put('users/{user}/restore', [UsersController::class, 'restore'])->name('users.restore');
 
 
 });
