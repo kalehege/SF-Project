@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::POST('/admin/exams/store', [ExamController::class, 'store'])->name('admin.exams.store');
     Route::get('/admin/exams/{exam_id}/overview', [ExamController::class, 'overview'])->name('admin.exams.overview');
     Route::put('/admin/exams/{exam}', [ExamController::class, 'update'])->name('admin.exams.update');
+    Route::put('/admin/exams/{exam}/delete', [ExamController::class, 'destroy'])->name('admin.exams.destroy');
 
 
     Route::POST('/quiz/store', [QuizController::class, 'store'])->name('quiz.store');

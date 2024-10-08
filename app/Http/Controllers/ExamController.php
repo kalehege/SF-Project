@@ -91,4 +91,14 @@ class ExamController extends Controller
         return redirect()->route('admin.exams.overview', $exam->id)->with('success', 'Exam updated successfully!');
     }
 
+
+    public function destroy($exam)
+    {
+//        dd($exam);
+        Exam::find($exam)->delete();
+
+        return redirect()->route('admin.exams.index')->with('success', 'Destroy successfully!');
+
+    }
+
 }

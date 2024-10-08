@@ -76,6 +76,11 @@ function ExamDetailPage({ exam, courses }: ExamDetailPageProps) {
     });
   };
 
+  const handleDeleteExam = () => {
+    put(`/admin/exams/${exam.id}/delete`, {
+    });
+  };
+
   // Function to update quiz answers
   const updateAnswer = (index: number, value: string) => {
     const updatedAnswers = [...quizData.answers];
@@ -91,10 +96,16 @@ function ExamDetailPage({ exam, courses }: ExamDetailPageProps) {
         <p className="text-gray-900 mb-4 ml-5">{exam.courses.name}</p>
 
         {/* Trigger buttons for Modals */}
-        <button onClick={toggleEditModal} className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500">
+        <button onClick={toggleEditModal}
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500">
           Edit Exam
         </button>
-        <button onClick={toggleQuizModal} className="mt-4 ml-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500">
+        <button onClick={handleDeleteExam}
+                className="mt-4 ml-4 px-4 py-2  bg-rose-500 text-white rounded-md hover:bg-blue-500">
+          Delete Exam
+        </button>
+        <button onClick={toggleQuizModal}
+                className="mt-4 ml-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500">
           Configure Quiz
         </button>
 
@@ -261,7 +272,8 @@ function ExamDetailPage({ exam, courses }: ExamDetailPageProps) {
                       </option>
                     ))}
                   </select>
-                  {quizErrors.correctAnswerIndex && <div className="text-red-500 text-sm">{quizErrors.correctAnswerIndex}</div>}
+                  {quizErrors.correctAnswerIndex &&
+                    <div className="text-red-500 text-sm">{quizErrors.correctAnswerIndex}</div>}
                 </div>
 
                 <button type="submit" className="mt-4 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500">
