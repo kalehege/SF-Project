@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Exam;
 use App\Models\StudentCourse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -110,6 +111,15 @@ class CourseController extends Controller
         $course_register->save();
 
         return Redirect::route('courses.index');
+
+    }
+
+    public function destroy($course_id)
+    {
+//        dd($course_id);
+        Course::find($course_id)->delete();
+
+        return redirect()->route('admin.courses.index')->with('success', 'Destroy successfully!');
 
     }
 }

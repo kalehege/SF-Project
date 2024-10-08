@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth', 'verified']], function(){
     Route::POST('/admin/courses/store', [CourseController::class, 'store'])->name('admin.courses.store');
     Route::get('/admin/courses/{course_id}/overview', [CourseController::class, 'overview'])->name('admin.courses.overview');
     Route::put('/admin/courses/{course}', [CourseController::class, 'update'])->name('admin.courses.update');
+    Route::put('/admin/courses/{course_id}/delete', [CourseController::class, 'destroy'])->name('courses.destroy');
 
 
     Route::get('/courses', [CourseController::class, 'indexStudent'])->name('courses.index');

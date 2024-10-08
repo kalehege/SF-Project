@@ -39,6 +39,11 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
     });
   };
 
+  const handleDeleteExam = () => {
+    put(`/admin/courses/${course.id}/delete`, {
+    });
+  };
+
   return (
     <div className="min-h-screen p-8 bg-gray-50">
       <div className="max-w-4xl mx-auto bg-white p-6 rounded-md shadow-md">
@@ -99,6 +104,10 @@ function CourseDetailPage({ course }: CourseDetailPageProps) {
                 className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-400"
               >
                 Edit Course
+              </button>
+              <button onClick={handleDeleteExam}
+                      className="ml-4 px-4 py-2  bg-rose-500 text-white rounded-md hover:bg-blue-500">
+                Delete Exam
               </button>
               <a href="/admin/courses" className="text-blue-600 hover:underline">
                 ← Back to Courses
