@@ -1,0 +1,1 @@
+import{j as e}from"./app-BCgre1YW.js";import{c as a}from"./index-CFWMbi3i.js";function m({loading:s,className:n,children:t,...o}){const r=a("flex items-center","focus:outline-none",{"pointer-events-none bg-opacity-75 select-none":s},n);return e.jsxs("button",{disabled:s,className:r,...o,children:[s&&e.jsx("div",{className:"mr-2 btn-spinner"}),t]})}export{m as L};
