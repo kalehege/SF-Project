@@ -27,9 +27,10 @@ jobs:
         with:
           files: 'composer.json'
 
-      - name: Run composer install if composer.json exists
+      - name: Run composer update if composer.json exists
         if: steps.check_files.outputs.files_exists == 'true'
-        run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
+        run: composer update --no-progress
+  
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
